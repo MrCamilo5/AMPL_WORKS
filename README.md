@@ -1,6 +1,6 @@
 # AMPL WORKS.
 ## PROBLEMA DEL VINO
-```
+```AMPL
 solution for: Programacion_Entera
 objective: 1
 x1 = 3
