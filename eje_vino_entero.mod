@@ -1,9 +1,9 @@
 reset;
 model;
-var x {A,A}>=0;
-maximize O:
-    1
-;
+var x {1..3,1..3}>=0; #Creamos las 9 variables 
+maximize O: 
+    1 
+; #FO dummie
 subject to R1 {j in 1..3}:
     sum{i in 1..3} x[i,j] = 7
 ;
