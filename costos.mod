@@ -9,7 +9,7 @@ var x{1..13, 1..13}>=0;
 var y{1..3}, binary;
 var e{4..7}, binary;
 minimize O:
-    sum{i in 1..13, j in 1..13} (x[i,j]*Costo[j,i])  + sum{k in 1..3}(y[k]*Prob[k,2]) +sum{t in 4..7}(e[t]*Alma[t,2])
+    sum{i in 1..13, j in 1..13} (x[i,j]*Costo[j,i])  + sum{k in 1..3}(y[k]*Prob[k,2]*Prob[k,1]) +sum{t in 4..7}(e[t]*Alma[t,2])
 ;
 subject to RA{i in 1..3}:
     sum{j in 4..7} x[i,j] = Prob[i,1]*y[i]
