@@ -9,7 +9,13 @@ var x{1..13, 1..13}>=0;
 var y{1..3}, binary;
 var e{4..7}, binary;
 minimize O:
-    sum{i in 1..13, j in 1..13} (x[i,j]*Costo[j,i])  + sum{k in 1..3}(y[k]*Prob[k,2])+sum{t in 4..7}(e[t]*Alma[t,2])
+    sum{i in 1..13, j in 1..13} (x[i,j]*Costo[j,i])  + sum{k in 1..3}(y[k]*Prob[k,2]) +sum{t in 4..7}(e[t]*Alma[t,2])
+;
+subject to RA{i in 1..3}:
+    sum{j in 4..7} x[i,j] = Prob[i,1]*y[i]
+;
+subject to RB {i in 4..7}:
+    sum{j in 1..3} x[j,i] <= Alma[i,1]*e[i]
 ;
 subject to R0:
     sum{j in 1..3} y[j] >= 1
@@ -17,17 +23,11 @@ subject to R0:
 subject to R1:
     sum{j in 4..7} e[j] >= 1
 ;
-subject to RA{i in 1..3}:
-    sum{j in 4..7} x[i,j] <= Prob[i,1]*y[i]
-;
-subject to RB {i in 4..7}:
-    sum{j in 1..3} x[j,i] <= Alma[i,1]*e[i]
-;
 subject to RC{i in 4..7}:
     sum{j in 8..13} x[i,j] <= Alma[i,1]*e[i]
 ;
-subject to RD{i in 8..13}:
-    sum{j in 4..7} x[i,j] = Demanda[i]
+subject to RD{j in 8..13}:
+    sum{i in 4..7} x[i,j] >= Demanda[j]
 ;
 data;
 param Prob:
